@@ -88,22 +88,27 @@ $('.tab-content').show();
   });
 
   // TODONE: Add an event handler to update the preview and the export field if any inputs change.
-  $('new-article-form').on('change', 'input, textarea', function() {
-    console.log('hola');
-  });
+  $('#new-article-form').on('change', articleView.create);
+
 };
 
 articleView.create = () => {
-  // TODO: Set up a variable to hold the new article we are creating.
+  // TODONE: Set up a variable to hold the new article we are creating.
   // Clear out the #articles element, so we can put in the updated preview
+  $('#articles').empty();
+  let newArticleData = {
+    title: $('#title').val(),
+    body: $('#body').val(),
+    author: $('#author').val(),
+    authorUrl: $('#author-url').val(),
+    category: $('#category').val(),
+    publishedOn: $('#article-published:checked').length ? new Date() : null  
+  };
+  // TODONE: Instantiate an article based on what's in the form fields:
+  let newArticle = new Article(newArticleData);
 
-
-  // TODO: Instantiate an article based on what's in the form fields:
-
-
-  // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
-
-
+  // TODONE: Use our interface to the Handblebars template to put this new article into the DOM:
+$('#articles').append(newArticleData.toHtml());
   // TODO: Activate the highlighting of any code blocks; look at the documentation for hljs to see how to do this by placing a callback function in the .each():
   $('pre code').each();
 
